@@ -59,7 +59,10 @@ if __name__ == "__main__":
         elif key == "estado_atuacao":
             psub["00N4W00000S0yWS"]=val
         elif key == "marcas":
-            psub["00N4W00000S0yWk"]=val
+            if val.find(",")<0:
+                psub["00N4W00000S0yWk"]=val
+            else:
+                psub["00N4W00000S0yWk"]=[item.strip() for item in val.split(",")]
         elif key == "mensagem":
             psub["description"]=val
         elif key == "core":

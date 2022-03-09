@@ -38,8 +38,8 @@ if __name__ == "__main__":
                 payload_subs.append(psub)
             psub={}
             psub["00N4W00000S0yWk"]=""
-            #psub["debug"]="1"
-            #psub["debugEmail"]="osmar.gascho@nbwdigital.com.br"
+            psub["debug"]="1"
+            psub["debugEmail"]="osmar.gascho@nbwdigital.com.br"
             psub["external"]="1"
             psub["orgid"]="00D4W000007QCau"
             psub["retURL"]="http://lunelli.com.br"
@@ -60,7 +60,7 @@ if __name__ == "__main__":
         elif key == "ondecidade":
             psub["description"]+=" - "+val
         elif key == "marcas_procura":
-            psub["00N4W00000S0yWk"]=val
+            psub["description"]+=" - Marcas desejadas: "+val
     
     payload_subs.append(psub)
 

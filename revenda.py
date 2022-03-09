@@ -38,8 +38,8 @@ if __name__ == "__main__":
                 payload_subs.append(psub)
             psub={}
             psub["00N4W00000S0yWk"]=""
-            #psub["debug"]="1"
-            #psub["debugEmail"]="osmar.gascho@nbwdigital.com.br"
+            psub["debug"]="1"
+            psub["debugEmail"]="osmar.gascho@nbwdigital.com.br"
             psub["external"]="1"
             psub["lead_source"]="Site"
             psub["oid"]="00D4W000007QCau"
@@ -61,7 +61,10 @@ if __name__ == "__main__":
         elif key == "mensagem":
             psub["00N4W00000S0yae"]=val
         elif key == "marcas":
-            psub["00N4W00000S0ya8"]=val
+            if val.find(",")<0:
+                psub["00N4W00000S0ya8"]=val
+            else:
+                psub["00N4W00000S0ya8"]=[item.strip() for item in val.split(",")]
         elif key == "tipo_pessoa":
             psub["00N4W00000S0yag"]=val
         elif key == "lojista":
@@ -85,7 +88,10 @@ if __name__ == "__main__":
         elif key == "campo_fb":
             psub["00N4W00000S0yaQ"]=val
         elif key == "field_02dfc81":
-            psub["00N4W00000S0yaJ"]=val
+            if val.find(",")<0:
+                psub["00N4W00000S0yaJ"]=val
+            else:
+                psub["00N4W00000S0yaJ"]=[item.strip() for item in val.split(",")]
             
     payload_subs.append(psub)
             
