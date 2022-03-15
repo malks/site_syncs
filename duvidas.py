@@ -8,6 +8,8 @@ if __name__ == "__main__":
     payload_subs=[]
     psub={}
 
+    done_mails=[]
+
     url = "https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8"
     element_id = "ab8fab7"
 
@@ -31,10 +33,17 @@ if __name__ == "__main__":
     """
 
     submissions=run_select(sql,main_conn)
+
+
+    sql="SELECT email FROM salesforce_synced_mails WHERE synced_at>=DATE_SUB(NOW(), INTERVAL 24 HOUR)"
+
+    nonomails=run_select_array_ret(sql,main_conn)
+
+
     for submission in submissions:
         if current_sub!=submission["submission_id"]:
             current_sub=submission["submission_id"]
-            if len(psub)>0:
+            if len(psub)>0 and str(payload["email"]) not in nonomails:
                 payload_subs.append(psub)
             psub={}
             psub["00N4W00000S0yWk"]=""
@@ -58,16 +67,22 @@ if __name__ == "__main__":
                 psub["description"]=val
 
     payload_subs.append(psub)
-    
+
     if current_sub!=0:
         update="UPDATE lunelli2.last_salesforce_sync SET submission_id='"+str(current_sub)+"' WHERE element_id='"+element_id+"'"
         run_sql(update,main_conn)
 
     if len(payload_subs)>0:
         for payload in payload_subs:
-            response = requests.request("POST", url, data=payload)
-            print(payload)
-            print(response)
+            if str(payload["email"]) not in done_mails and str(payload["email"]) not in nonomails:
+                response = requests.request("POST", url, data=payload)
+                done_mails.append(str(payload["email"]))
+                print(payload)
+                print(response)
+
+        if len(done_mails)>0:
+            for mail in done_mails:
+                insert="INSERT INTO lunelli2.salesforce_synced_mails (`email`) VALUES ('"+mail+"') ON DUPLICATE KEY UPDATE synced_at=NOW()"
     else :
         print("Nada novo")
     exit()
