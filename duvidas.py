@@ -83,6 +83,7 @@ if __name__ == "__main__":
         if len(done_mails)>0:
             for mail in done_mails:
                 insert="INSERT INTO lunelli2.salesforce_synced_mails (`email`) VALUES ('"+mail+"') ON DUPLICATE KEY UPDATE synced_at=NOW()"
+                run_sql(insert,main_conn)
     else :
         print("Nada novo")
     exit()
