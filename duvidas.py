@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-import requests,send_mail
+import requests
+from send_mail import send_mail
 from mysql_connection import run_select,run_sql,run_select_array_ret,new_conn
 
 if __name__ == "__main__":
