@@ -58,16 +58,16 @@ if __name__ == "__main__":
         key = str(submission["key"])
         val = str(submission["value"])
         if key == "nome":
-                psub["00N4W00000S0yWc"]=val
+            psub["00N4W00000S0yWc"]=val
         elif key == "email":
-                psub["email"]=val
+            psub["email"]=val
         elif key == "telefone":
-                psub["00N4W00000S0yWW"]=val[1:3]
-                psub["00N4W00000S0yX1"]=val[5:10]+val[11:15]
+            psub["00N4W00000S0yWW"]=val[1:3]
+            psub["00N4W00000S0yX1"]=val[5:10]+val[11:15]
         elif key == "mensagem":
-                psub["description"]=val
+            psub["description"]=val
         elif key == "field_84d5bbe" and val=="Lojas Virtuais":
-                ecom_mails.append(psub["email"])
+            ecom_mails.append(psub["email"])
 
     payload_subs.append(psub)
 
