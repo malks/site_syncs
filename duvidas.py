@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import requests
+import requests,send_mail
 from mysql_connection import run_select,run_sql,run_select_array_ret,new_conn
 
 if __name__ == "__main__":
@@ -9,6 +9,7 @@ if __name__ == "__main__":
     psub={}
 
     done_mails=[]
+    ecom_mails=[]
 
     url = "https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8"
     element_id = "ab8fab7"
@@ -65,6 +66,8 @@ if __name__ == "__main__":
                 psub["00N4W00000S0yX1"]=val[5:10]+val[11:15]
         elif key == "mensagem":
                 psub["description"]=val
+        elif key == "field_84d5bbe" and value=="Lojas Virtuais":
+                ecom_mails.append(psub["email"])
 
     payload_subs.append(psub)
 
@@ -75,10 +78,13 @@ if __name__ == "__main__":
     if len(payload_subs)>0:
         for payload in payload_subs:
             if str(payload["email"]) not in done_mails and str(payload["email"]) not in nonomails:
-                response = requests.request("POST", url, data=payload)
-                done_mails.append(str(payload["email"]))
-                print(payload)
-                print(response)
+                if payload["email"] in ecom_mails:
+                    send_mail(payload)
+                else:
+                    response = requests.request("POST", url, data=payload)
+                    done_mails.append(str(payload["email"]))
+                    print(payload)
+                    print(response)
 
         if len(done_mails)>0:
             for mail in done_mails:
