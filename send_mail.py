@@ -12,8 +12,11 @@ for x in f:
 
 def send_mail(data):
     server_smtp=SMTP(authdata["SERVER"],authdata["PORT"])
-    server_smtp.login(authdata["USER"],authdata["PASSWORD"])
+    server_smtp.connect(authdata["SERVER"],authdata["PORT"])
+    server_smtp.ehlo()
     server_smtp.starttls()
+    server_smtp.ehlo()
+    server_smtp.login(authdata["USER"],authdata["PASSWORD"])
     message="Mensagem originada do Site lunelli.com.br\n\n"
     message+="Nome: "+data["00N4W00000S0yWc"]+"\n"
     message+="Email: "+data["email"]+"\n"
