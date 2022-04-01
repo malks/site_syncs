@@ -11,7 +11,7 @@ for x in f:
   authdata[str(x.split("=")[0]).strip()]=str(x.split("=")[1]).strip()
 
 def send_mail(data):
-    server_smtp=smtplib.SMTP(authdata["SERVER"],authdata["PORT"])
+    server_smtp=SMTP(authdata["SERVER"],authdata["PORT"])
     server_smtp.login(authdata["USER"],authdata["PASSWORD"])
     server_smtp.starttls()
     message="Mensagem originada do Site lunelli.com.br\n\n"
