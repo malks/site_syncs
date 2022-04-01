@@ -40,7 +40,7 @@ if __name__ == "__main__":
     for submission in submissions:
         if current_sub!=submission["submission_id"]:
             current_sub=submission["submission_id"]
-            if len(psub)>0 and str(payload["email"]) not in nonomails:
+            if len(psub)>0 and str(psub["email"]) not in nonomails:
                 payload_subs.append(psub)
             psub={}
             psub["00N4W00000S0yWk"]=""
