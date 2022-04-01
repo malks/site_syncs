@@ -19,4 +19,5 @@ def send_mail(data):
     message+="Email: "+data["email"]+"\n"
     message+="Mensagem: "+data["description"]+"\n"
     server_smtp.sendmail("noreply@lunelli.com.br","osmar.gascho@nbwdigital.com.br",message)
-    server_smtp.quit()
+    ret=server_smtp.quit()
+    print(ret)
