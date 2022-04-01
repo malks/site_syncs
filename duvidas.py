@@ -80,6 +80,7 @@ if __name__ == "__main__":
 
     if len(payload_subs)>0:
         for payload in payload_subs:
+            print(payload)
             if str(payload["email"]) not in done_mails and str(payload["email"]) not in nonomails:
                 if payload["email"] in ecom_mails:
                     send_mail(payload)
