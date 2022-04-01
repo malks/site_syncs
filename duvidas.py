@@ -66,7 +66,7 @@ if __name__ == "__main__":
                 psub["00N4W00000S0yX1"]=val[5:10]+val[11:15]
         elif key == "mensagem":
                 psub["description"]=val
-        elif key == "field_84d5bbe" and value=="Lojas Virtuais":
+        elif key == "field_84d5bbe" and val=="Lojas Virtuais":
                 ecom_mails.append(psub["email"])
 
     payload_subs.append(psub)
