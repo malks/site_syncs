@@ -47,7 +47,6 @@ if __name__ == "__main__":
             if len(psub)>0 and str(psub["email"]) not in nonomails:
                 payload_subs.append(psub)
             psub={}
-            ecom=False
             psub["00N4W00000S0yWk"]=""
             #psub["debug"]="1"
             #psub["debugEmail"]="osmar.gascho@nbwdigital.com.br"
@@ -62,15 +61,13 @@ if __name__ == "__main__":
             psub["00N4W00000S0yWc"]=val
         elif key == "email":
             psub["email"]=val
-            if ecom:
-                ecom_mails.append(val)
         elif key == "telefone":
             psub["00N4W00000S0yWW"]=val[1:3]
             psub["00N4W00000S0yX1"]=val[5:10]+val[11:15]
         elif key == "mensagem":
             psub["description"]=val
         elif key == "field_84d5bbe" and val=="Lojas Virtuais":
-            ecom=True
+            ecom_mails.append(psub["email"])
 
     payload_subs.append(psub)
 
@@ -80,7 +77,6 @@ if __name__ == "__main__":
 
     if len(payload_subs)>0:
         for payload in payload_subs:
-            print(payload)
             if str(payload["email"]) not in done_mails and str(payload["email"]) not in nonomails:
                 if payload["email"] in ecom_mails:
                     send_mail(payload)
