@@ -19,9 +19,9 @@ def send_mail(data):
     server_smtp.starttls()
     server_smtp.ehlo()
     server_smtp.login(authdata["USER"],authdata["PASSWORD"])
-    msg["Subject"] = "Contato Site"
+    msg["Subject"] = "Contato Lojas Virtuais Site Lunelli"
     msg["From"] = "noreply@lunelli.com.br"
-    msg["To"] = "sac@grupolunelli.com"
+    msg["To"] = "sac@lunenderstore.com"
     message=""
     message+="Dúvida sobre Lojas Virtuais no site lunelli.com.br:\n\n"
     message+="Nome: "+data["00N4W00000S0yWc"]+"\n"
