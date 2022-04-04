@@ -19,11 +19,11 @@ def send_mail(data):
     server_smtp.starttls()
     server_smtp.ehlo()
     server_smtp.login(authdata["USER"],authdata["PASSWORD"])
-    msg["Subject"] = "An Email Alert"
+    msg["Subject"] = "Contato Site"
     msg["From"] = "noreply@lunelli.com.br"
-    msg["To"] = "osmar.gascho@nbwdigital.com.br"
+    msg["To"] = "suporte@grupolunelli.zendesk.com"
     message=""
-    message+="Mensagem originada do Site lunelli.com.br\n\n"
+    message+="Formulário de dúvidas do Site lunelli.com.br\n\n"
     message+="Nome: "+data["00N4W00000S0yWc"]+"\n"
     message+="Email: "+data["email"]+"\n"
     message+="Mensagem: "+data["description"]+"\n"
