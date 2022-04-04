@@ -28,6 +28,6 @@ def send_mail(data):
     message+="Email: "+data["email"]+"\n"
     message+="Mensagem: "+data["description"]+"\n"
     msg.set_content(message)
-    server_smtp.sendmessage(msg)
+    server_smtp.send_message(msg)
     ret=server_smtp.quit()
     print(ret)
