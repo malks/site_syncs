@@ -21,7 +21,7 @@ def send_mail(data):
     server_smtp.login(authdata["USER"],authdata["PASSWORD"])
     msg["Subject"] = "Contato Lojas Virtuais Site Lunelli"
     msg["From"] = "noreply@lunelli.com.br"
-    msg["To"] = "sac@lunenderstore.com"
+    msg["To"] = "support@lunender.zendesk.com"
     message=""
     message+="Dúvida sobre Lojas Virtuais no site lunelli.com.br:\n\n"
     message+="Nome: "+data["00N4W00000S0yWc"]+"\n"
