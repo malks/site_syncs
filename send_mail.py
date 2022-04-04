@@ -26,7 +26,6 @@ def send_mail(data):
     message+="Formulário de dúvidas do Site lunelli.com.br\n\n"
     message+="Nome: "+data["00N4W00000S0yWc"]+"\n"
     message+="Email: "+data["email"]+"\n"
-    message+="Fone: ("+data["00N4W00000S0yWW"]+") "+data["00N4W00000S0yX1"]"\n"
     message+="Mensagem: "+data["description"]+"\n"
     msg.set_content(message)
     server_smtp.send_message(msg)
