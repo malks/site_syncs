@@ -7,12 +7,12 @@ home=str(os.path.expanduser("~"))
 f=open(os.path.join(os.path.expanduser("~"),".smtp_auth"),"r")
   
 authdata={}
-msg = EmailMessage()
 
 for x in f:
   authdata[str(x.split("=")[0]).strip()]=str(x.split("=")[1]).strip()
 
 def send_mail(data):
+    msg = EmailMessage()
     server_smtp=SMTP(authdata["SERVER"],authdata["PORT"])
     server_smtp.connect(authdata["SERVER"],authdata["PORT"])
     server_smtp.ehlo()
