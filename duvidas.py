@@ -80,6 +80,8 @@ if __name__ == "__main__":
         for payload in payload_subs:
             if str(payload["email"]) not in done_mails and str(payload["email"]) not in nonomails:
                 if payload["email"] in ecom_mails:
+                    print("Sending mail")
+                    print(payload)
                     send_mail(payload)
                 else:
                     response = requests.request("POST", url, data=payload)
