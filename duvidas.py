@@ -85,9 +85,9 @@ if __name__ == "__main__":
                     send_mail(payload)
                 else:
                     response = requests.request("POST", url, data=payload)
-                    done_mails.append(str(payload["email"]))
                     print(payload)
                     print(response)
+                done_mails.append(str(payload["email"]))
 
         if len(done_mails)>0:
             for mail in done_mails:
