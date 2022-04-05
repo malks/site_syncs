@@ -1,7 +1,37 @@
 #!/usr/bin/python3
-import requests
+
+import requests,os
 from send_mail import send_mail
 from mysql_connection import run_select,run_sql,run_select_array_ret,new_conn
+
+home=str(os.path.expanduser("~"))
+f=open(os.path.join(os.path.expanduser("~"),".zendesk_auth"),"r")
+auth=""
+for x in f:
+    auth=x
+
+def zdskRequest(data):
+    message=""
+    message+="Dúvida sobre Lojas Virtuais no site lunelli.com.br:\n\n"
+    message+="Nome: "+data["00N4W00000S0yWc"]+"\n"
+    message+="Email: "+data["email"]+"\n"
+    message+="Mensagem: "+data["description"]+"\n"
+
+    body={}
+    body["request"]={}
+    body["request"]["requester"]={}
+    body["request"]["requester"]["name"]="Contato Site Lunelli"
+    body["request"]["subject"]="Dúvidas sobre Loja Virtual no site lunelli.com.br"
+    body["request"]["comment"]={}
+    body["request"]["comment"]["body"]=message
+
+    header={}
+    header["Auth"]=str(auth).strip()
+    header["Content-type"]="application/json"
+    urlzdsk="https://grupolunelli.zendesk.com//api/v2/requests.json"
+    res=requests.request("POST", urlzdsk, json=body, headers=header)
+    print(res)
+
 
 if __name__ == "__main__":
     main_conn=new_conn()
@@ -80,13 +110,13 @@ if __name__ == "__main__":
         for payload in payload_subs:
             if str(payload["email"]) not in done_mails and str(payload["email"]) not in nonomails:
                 if payload["email"] in ecom_mails:
-                    print("Sending mail")
                     print(payload)
-                    send_mail(payload)
+                    print("Zendesk")
+                    zdskRequest(payload)
                 else:
-                    response = requests.request("POST", url, data=payload)
                     print(payload)
-                    print(response)
+                    print("Salesforce")
+                    response = requests.request("POST", url, data=payload)
                 done_mails.append(str(payload["email"]))
 
         if len(done_mails)>0:
