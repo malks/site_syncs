@@ -19,7 +19,6 @@ def zdskRequest(data):
     body["request"]["comment"]["body"]=message
 
     header={}
-    header["Auth"]="Bearer go2pZRSjm053nW85WTrINqKA9LcJAsPbQyFMBUmc"
     header["Content-type"]="application/json"
     urlzdsk="https://grupolunelli.zendesk.com//api/v2/requests.json"
     res=requests.request("POST", urlzdsk, json=body, headers=header)
