@@ -84,7 +84,7 @@ if __name__ == "__main__":
             psub["external"]="1"
             psub["orgid"]="00D4W000007QCau"
             psub["retURL"]="http://lunelli.com.br"
-            psub["recordType"]="0124W000000u0SMQAY"
+            psub["recordType"]="0124W000000u0SM"
         
         key = str(submission["key"])
         val = str(submission["value"])
